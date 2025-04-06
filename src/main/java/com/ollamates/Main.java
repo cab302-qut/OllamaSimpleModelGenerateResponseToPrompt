@@ -1,23 +1,48 @@
 package com.ollamates;
 
 import io.github.ollama4j.OllamaAPI;
+import io.github.ollama4j.models.generate.OllamaStreamHandler;
 import io.github.ollama4j.models.response.OllamaResult;
 import io.github.ollama4j.types.OllamaModelType;
+import io.github.ollama4j.utils.Options;
 import io.github.ollama4j.utils.OptionsBuilder;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.Scanner;
+
+
 public class Main {
 
-    private static final String API_LOCATION = "http://localhost:11434/";
+
+
 
     public static void main(String[] args) {
 
-        OllamaAPI ollamaAPI = new OllamaAPI(API_LOCATION);
+        OllamaAPITest test = new OllamaAPITest();
+        String prompt = GetUserInput();
 
-        OllamaResult result =
-                ollamaAPI.generate(OllamaModelType.LLAMA2, "Who are you?", new OptionsBuilder().build());
+        OllamaGenerate generateResponse = new OllamaGenerate(prompt);
+        Thread thread = new Thread(generateResponse);
+        thread.start();
 
-        System.out.println(result.getResponse());
+        OllamaStreamHandler streamHandler = (s) -> {
+            System.out.println(s);
+        };
+
+        try {
+            Thread.sleep(10L * 1000L);
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
+
+    private static String GetUserInput() {
+        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        System.out.println("Enter prompt for AI - ");
+
+       return myObj.nextLine();
+    }
+
+
 }
