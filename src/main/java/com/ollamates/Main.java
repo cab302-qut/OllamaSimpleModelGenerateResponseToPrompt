@@ -1,11 +1,9 @@
 package com.ollamates;
 
-import io.github.ollama4j.OllamaAPI;
-import io.github.ollama4j.models.generate.OllamaStreamHandler;
-import io.github.ollama4j.models.response.OllamaResult;
-import io.github.ollama4j.types.OllamaModelType;
-import io.github.ollama4j.utils.Options;
-import io.github.ollama4j.utils.OptionsBuilder;
+import io.github.amithkoujalgi.ollama4j.core.models.OllamaResult;
+
+
+import io.github.amithkoujalgi.ollama4j.core.OllamaAPI;
 
 import java.util.Scanner;
 
@@ -13,28 +11,17 @@ import java.util.Scanner;
 public class Main {
 
 
-
-
     public static void main(String[] args) {
 
         OllamaAPITest test = new OllamaAPITest();
         String prompt = GetUserInput();
-
-        OllamaGenerate generateResponse = new OllamaGenerate(prompt);
-        Thread thread = new Thread(generateResponse);
-        thread.start();
-
-        OllamaStreamHandler streamHandler = (s) -> {
-            System.out.println(s);
-        };
-
+        OllamaSyncResponse generateResponse = new OllamaSyncResponse(prompt);
         try {
-            Thread.sleep(10L * 1000L);
-            thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            String result = generateResponse.ollamaResponse();
+            System.out.println("Full response: " + result);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-
     }
 
     private static String GetUserInput() {

@@ -1,6 +1,6 @@
 package com.ollamates;
 
-import io.github.ollama4j.OllamaAPI;
+import io.github.amithkoujalgi.ollama4j.core.OllamaAPI;
 
 public class OllamaAPITest {
 
