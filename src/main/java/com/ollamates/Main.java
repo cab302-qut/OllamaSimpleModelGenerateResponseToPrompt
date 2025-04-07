@@ -1,15 +1,15 @@
 package com.ollamates;
-
-import io.github.amithkoujalgi.ollama4j.core.models.OllamaResult;
-
-
-import io.github.amithkoujalgi.ollama4j.core.OllamaAPI;
-
 import java.util.Scanner;
 
 
 public class Main {
 
+    /**
+     * Test driver for Ollama Generate Sync - This API lets you ask questions to the LLMs in a synchronous way.
+     * This API corresponds to the completion API.     *
+     * Use the OptionBuilder to build the Options object with extra parameters.
+     *
+     */
 
     public static void main(String[] args) {
 
@@ -24,6 +24,10 @@ public class Main {
         }
     }
 
+    /**
+     * Helper method for user input used as prompt
+     * @return String prompt to LLM
+     */
     private static String GetUserInput() {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         System.out.println("Enter prompt for AI - ");

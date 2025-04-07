@@ -1,7 +1,11 @@
 package com.ollamates;
 
-import io.github.amithkoujalgi.ollama4j.core.OllamaAPI;
 
+import io.github.ollama4j.OllamaAPI;
+
+/**
+ * Simple class to check that Ollama Server is running locally
+ */
 public class OllamaAPITest {
 
 
@@ -9,12 +13,10 @@ public class OllamaAPITest {
 
         public OllamaAPITest() {
             OllamaAPI ollamaAPI = new OllamaAPI(HOST);
-
-        boolean ollamaOnLine = ollamaAPI.ping();
-        if (ollamaOnLine) {
-            System.out.println("The Ollama Server is running: ");
-        } else {
-            System.out.println("The Ollama Server is currently not available ");
-        }
+            if (ollamaAPI.ping()) {
+                System.out.println("The Ollama Server is running: ");
+            } else {
+                System.out.println("The Ollama Server is currently not available ");
+            }
     }
 }
